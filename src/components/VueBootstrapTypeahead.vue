@@ -135,14 +135,21 @@ export default {
     },
 
     handleHit(evt) {
-      if (typeof this.value !== 'undefined') {
-        this.$emit('input', evt.text)
-      }
+      if (evt) {
+        if(typeof this.value !== 'undefined')
+        {
+          this.$emit('input', evt.text)
+        }
 
-      this.inputValue = evt.text
-      this.$emit('hit', evt.data)
-      this.$refs.input.blur()
-      this.isFocused = false
+        this.inputValue = evt.text
+        this.$emit('hit', evt.data)
+        this.$refs.input.blur()
+        this.isFocused = false
+      } else if (typeof this.value !== 'undefined') {
+        this.$emit('hit', this.value)
+        this.$refs.input.blur()
+        this.isFocused = false
+      }
     },
 
     handleBlur(evt) {
